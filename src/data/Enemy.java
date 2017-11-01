@@ -1,6 +1,9 @@
 package data;
 
 import org.newdawn.slick.opengl.Texture;
+
+import java.util.ArrayList;
+
 import static helpers.Artist.*;
 import static helpers.Clock.*;
 
@@ -12,6 +15,9 @@ public class Enemy {
     private boolean first = true; // First time this is being run // Small fix
     private TileGrid grid;
 
+    private ArrayList<Checkpoint> checkpoints;
+    private int[] directions;
+
     public Enemy(Texture texture, Tile startTile, TileGrid grid, int width, int height, float speed){
         this.texture = texture;
         this.startTile = startTile;
@@ -21,18 +27,80 @@ public class Enemy {
         this.height = height;
         this.speed = speed;
         this.grid = grid;
+
+        this.checkpoints = new ArrayList<Checkpoint>();
+        this.directions = new int[2];
+        // X Direction
+        this.directions[0] = 0;
+        // Y Direction
+        this.directions[1] = 0;
+        directions = FindNextD(startTile);
     }
 
     public void Update() {
         if (first)
             first = false;
         else {
-            if (pathContinues())
-            x += Delta() * speed;
+            x += Delta() * directions[0];
+            y += Delta() * directions[1];
+
         }
     }
 
-    private boolean pathContinues(){
+    private Checkpoint FindNextC(Tile s, int[] dir) {
+        Tile next = null;
+        Checkpoint c = null;
+
+        // Boolean to decide if next checkpoint is found
+        boolean found = false;
+
+        // Integer to increment each loop
+        int counter = 1;
+
+        while(!found){
+
+            if(s.getType() != grid.GetTile(s.getXPlace()+ dir[0] * counter,
+                    s.getYPlace() + dir[1] * counter).getType()){
+                found = true;
+                // Move counter back 1 to find tile before new tiletype.
+                counter -= 1;
+                next  = grid.GetTile(s.getXPlace()+ dir[0] * counter,
+                        s.getYPlace() + dir[1] * counter);
+            }
+            counter++;
+        }
+
+        c = new Checkpoint(next, dir[0], dir[1]);
+        return c;
+    }
+
+    // Pass the tile where the enemies are right now, and it will return a set of integers.
+    private int[] FindNextD(Tile s) {
+        int[] dir = new int[2];
+        Tile u = grid.GetTile(s.getXPlace(), s.getYPlace() -1); // Tile u is Up.
+        Tile r = grid.GetTile(s.getXPlace() +1, s.getYPlace()); // Tile r is Right.
+        Tile d = grid.GetTile(s.getXPlace(), s.getYPlace() +1); // Tile d is Down.
+        Tile l = grid.GetTile(s.getXPlace() - 1, s.getYPlace()); // Tile l is Left.
+
+        if (s.getType() == u.getType()) {
+            dir[0] = 0;
+            dir[1] = -1;
+        }else if (s.getType() == r.getType()) {
+            dir[0] = 1;
+            dir[1] = 0;
+        }else if (s.getType() == d.getType()) {
+            dir[0] = 0;
+            dir[1] = 1;
+        }else if (s.getType() == l.getType()) {
+            dir[0] = -1;
+            dir[1] = 0;
+        }else {
+            System.out.println("NO DIRECTION FOUND"); // Debugging
+        }
+        return dir;
+    }
+
+    /*private boolean pathContinues(){
         boolean answer = true;
 
         Tile myTile = grid.GetTile((int) (x / 64), (int) (y / 64)); // Our actual x might be something like 700, but since our tiles are 64 we divide x with 64.
@@ -42,7 +110,7 @@ public class Enemy {
             answer = false;
 
         return answer;
-    }
+    }*/
 
     public void Draw() {
         DrawQuadTex(texture, x, y, width, height);

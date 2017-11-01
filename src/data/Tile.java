@@ -28,6 +28,14 @@ public class Tile {
         return x;
     }
 
+    public int getXPlace(){
+        return (int) x / 64; // Each tile is 64 long
+    }
+
+    public int getYPlace(){
+        return (int) y/64; // Each tile is 64 long
+    }
+
     public void setX(float x) {
         this.x = x;
     }
