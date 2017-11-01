@@ -21,7 +21,7 @@ public class Artist {
     public static void BeginSession () {
         Display.setTitle("TD Game");
         try {
-            Display.setDisplayMode(new DisplayMode(600, 400));
+            Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
             Display.create();
         } catch (LWJGLException e) { // In case something goes wrong, catch the error and stop the program and tell whats wrong
             e.printStackTrace();
@@ -32,6 +32,8 @@ public class Artist {
         glOrtho(0, WIDTH, HEIGHT,0, 1,-1 );
         glMatrixMode(GL_MODELVIEW);
         glEnable(GL_TEXTURE_2D); // Draw texture to the screen
+        glEnable(GL_BLEND); // Enable blending for the enemy
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA); // Setting the alpha channel ( Transparency)
     }
 
     public static void DrawQuad(float x, float y, float width, float height){

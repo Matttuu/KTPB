@@ -13,14 +13,34 @@ public class Boot {
 
         BeginSession();
 
+        int[][] map = {
 
-       Tile tile = new Tile(0,0,64,64,TileType.Grass);
-       Tile tile2 = new Tile (0,64,64,64, TileType.Dirt);
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,1,1,0,1,1,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,1,2,2,2,2,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,1,1,1,1,1,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+
+        };
+
+        TileGrid grid = new TileGrid(map);
+        grid.SetTile(3, 4, grid.GetTile(2,4).getType());
+        Enemy e = new Enemy(QuickLoad("UFO64"), grid.GetTile(10,10),64,64, 2);
         // This is where all the code for running the game is going.
         while(!Display.isCloseRequested()){ // When we are not hitting the exit button, the game will run this.
 
-            tile.Draw();
-            tile2.Draw();
+            grid.Draw();
+            e.Draw();
 
 
             Display.update();
