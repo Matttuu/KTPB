@@ -1,9 +1,7 @@
 package data;
 
 import org.newdawn.slick.opengl.Texture;
-
 import java.util.ArrayList;
-
 import static helpers.Artist.*;
 import static helpers.Clock.*;
 
@@ -14,7 +12,6 @@ public class Enemy {
     private Tile startTile;
     private boolean first = true; // First time this is being run // Small fix
     private TileGrid grid;
-
     private ArrayList<Checkpoint> checkpoints;
     private int[] directions;
 
@@ -27,7 +24,6 @@ public class Enemy {
         this.height = height;
         this.speed = speed;
         this.grid = grid;
-
         this.checkpoints = new ArrayList<Checkpoint>();
         this.directions = new int[2];
         // X Direction
