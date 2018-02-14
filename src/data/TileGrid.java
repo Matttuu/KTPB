@@ -5,6 +5,7 @@ import static helpers.Artist.DrawQuadTex;
 public class TileGrid {
 
     public Tile[][] map;
+    private int tilesWide, tilesHigh;
 
     public TileGrid(){
         map = new Tile[20][15];
@@ -16,7 +17,9 @@ public class TileGrid {
     }
 
     public TileGrid(int[][] newMap){
-        map = new Tile[20][15];
+        this.tilesWide = newMap[0].length;
+        this.tilesHigh = newMap.length;
+        map = new Tile[tilesWide][tilesHigh];
         for (int i = 0; i < map.length; i++){
             for (int j = 0; j < map[i].length; j++){
 
@@ -39,7 +42,10 @@ public class TileGrid {
     }
 
     public Tile GetTile(int xPlace, int yPlace) {
+        if (xPlace < tilesWide && yPlace < tilesHigh && xPlace > -1 && yPlace > -1)
         return map[xPlace] [yPlace];
+        else
+            return new Tile(0, 0, 0, 0, TileType.NULL);
     }
 
     public void Draw(){
@@ -48,5 +54,21 @@ public class TileGrid {
                 map[i][j].Draw();
             }
         }
+    }
+
+    public int getTilesWide() {
+        return tilesWide;
+    }
+
+    public void setTilesWide(int tilesWide) {
+        this.tilesWide = tilesWide;
+    }
+
+    public int getTilesHigh() {
+        return tilesHigh;
+    }
+
+    public void setTilesHigh(int tilesHigh) {
+        this.tilesHigh = tilesHigh;
     }
 }
