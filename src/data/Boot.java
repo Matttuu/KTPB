@@ -34,19 +34,11 @@ public class Boot {
 
         };
 
-        TileGrid grid = new TileGrid(map);
-        grid.SetTile(3, 4, grid.GetTile(2,4).getType());
-        Enemy e = new Enemy(QuickLoad("UFO64"), grid.GetTile(10,8), grid,64,64, 5);
-        Wave wave = new Wave(20, e);
-        Player player = new Player(grid);
-        // This is where all the code for running the game is going.
-        while(!Display.isCloseRequested()){ // When we are not hitting the exit button, the game will run this.
+       Game game = new Game(map);
+               while(!Display.isCloseRequested()){ // When we are not hitting the exit button, the game will run this.
             Clock.update();
 
-            grid.Draw();
-            wave.Update();
-            player.Update();
-
+            game.update();
 
 
             Display.update();
