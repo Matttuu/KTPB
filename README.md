@@ -1,4 +1,4 @@
-# TDGame
+# Keep the plebs out (KTPB)
 Tower defence game, using light weight openGL and slick.
 
 This is **WIP**, I'm yet to add much more content and first priority is to fix pathing.
