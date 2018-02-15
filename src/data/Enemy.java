@@ -10,7 +10,7 @@ public class Enemy {
     private float speed, x, y;
     private Texture texture;
     private Tile startTile;
-    private boolean first = true; // First time this is being run // Small fix
+    private boolean first = true, alive = true; // First time this is being run // Small fix
     private TileGrid grid;
     private ArrayList<Checkpoint> checkpoints;
     private int[] directions;
@@ -46,7 +46,8 @@ public class Enemy {
 
                 // The +1, makes sure we check if the next checkpoint exists before we move onto the next one.
                 if (currentCheckpoint + 1 == checkpoints.size())
-                    System.out.println("Enemy Reached End of Maze");
+                    Die(); // Tells our enemies to die when they reached end of the maze
+                     // System.out.println("Enemy Reached End of Maze"); // Debugging purposes.
                 else
                     currentCheckpoint++;
 
@@ -156,6 +157,10 @@ public class Enemy {
         return dir;
     }
 
+    private void Die() {
+        alive = false;
+    }
+
     /*private boolean pathContinues(){
         boolean answer = true;
 
@@ -246,5 +251,9 @@ public class Enemy {
 
     public TileGrid getTileGrid(){
         return grid;
+    }
+
+    public boolean isAlive(){
+        return alive;
     }
 }

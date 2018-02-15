@@ -23,9 +23,11 @@ public class Wave {
             timeSinceLastSpawn = 0;
         }
 
-        for (Enemy e: enemyList){
-            e.Update();
-            e.Draw();
+        for (Enemy e: enemyList) {
+            if (e.isAlive()) {
+                e.Update();
+                e.Draw();
+            }
         }
     }
 

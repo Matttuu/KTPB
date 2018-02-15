@@ -2,6 +2,8 @@ package helpers;
 
 import org.lwjgl.Sys;
 
+import java.sql.SQLOutput;
+
 public class Clock {
 
     private static boolean paused = false;
@@ -16,6 +18,9 @@ public class Clock {
         long currentTime = getTime();
         int delta = (int)(currentTime - lastFrame);
         lastFrame = getTime();
+         // System.out.println(delta * 0.01f); // Debugging purposes
+        if (delta * 0.01> 0.5f)
+            return 0.5f;
         return delta * 0.01f;
     }
 
