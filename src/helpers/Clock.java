@@ -19,9 +19,9 @@ public class Clock {
         int delta = (int)(currentTime - lastFrame);
         lastFrame = getTime();
          // System.out.println(delta * 0.01f); // Debugging purposes
-        if (delta * 0.01> 0.5f)
-            return 0.5f;
-        return delta * 0.01f;
+        if (delta * 0.001> 0.05f)
+            return 0.05f;
+        return delta * 0.001f;
     }
 
     public static float Delta() {

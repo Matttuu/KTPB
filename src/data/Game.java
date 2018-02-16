@@ -2,30 +2,32 @@ package data;
 
 import static helpers.Artist.QuickLoad;
 
+import static helpers.Clock.*;
+
 public class Game {
 
     private TileGrid grid;
     private Player player;
-    private Wave wave;
+    private WaveManager waveManager;
 
-    //Temp Variables
-    TowerCannon tower;
-
+    private float test;
 
     public Game(int[][] map) {
         grid = new TileGrid(map);
-        player = new Player(grid);
-        wave = new Wave(20, new Enemy(QuickLoad("UFO64"), grid.GetTile(10,8), grid,64,64, 5));
 
-        tower = new TowerCannon(QuickLoad("cannonBase"), grid.GetTile(14, 7), 10);
+        waveManager = new WaveManager(new Enemy(QuickLoad("UFO64"), grid.GetTile(10,8), grid,64,64, 70),
+                2, 2);
+        player = new Player(grid, waveManager);
+
+
     }
     public void update(){
+        test += Delta();
+        System.out.println(test);
+
         grid.Draw();
-        wave.Update();
-        player.Update();
-
-        tower.update();
-
+        waveManager.update();
+        player.update();
 
     }
 }
