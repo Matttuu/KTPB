@@ -9,6 +9,7 @@ public class Game {
     private TileGrid grid;
     private Player player;
     private WaveManager waveManager;
+    public static final int TILE_SIZE = 64;
 
     private float test;
 
@@ -23,7 +24,7 @@ public class Game {
     }
     public void update(){
         test += Delta();
-        System.out.println(test);
+
 
         grid.Draw();
         waveManager.update();
