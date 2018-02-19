@@ -29,10 +29,7 @@ public class Player {
         this.leftMouseButtonDown = false;
     }
 
-    public void setTile(){
-        grid.SetTile((int)Math.floor(Mouse.getX() / 64),
-                (int)Math.floor((HEIGHT - Mouse.getY() - 1) / 64), types[index]);
-    }
+
 
     public void update() {
 
@@ -45,8 +42,9 @@ public class Player {
             towerList.add(new TowerCannon(QuickLoad("cannonbase"), grid.GetTile(Mouse.getX()/ 64, (HEIGHT - Mouse.getY() -1) / 64), 10, waveManager.getCurrentWave().getEnemyList()));
             // setTile();
 
-            leftMouseButtonDown = Mouse.isButtonDown(0);
+
         }
+        leftMouseButtonDown = Mouse.isButtonDown(0);
 
         // Handle Keyboard Input
         while (Keyboard.next()) {
@@ -64,11 +62,6 @@ public class Player {
         }
     }
 
-    private void moveIndex() {
-        index++;
-        if (index > types.length - 1){
-            index = 0;
-        }
-    }
+
 
 }

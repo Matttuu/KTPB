@@ -50,6 +50,9 @@ public class StateManager {
 
                 break;
             case EDITOR:
+                if (editor == null)
+                    editor = new Editor();
+                editor.update();
 
                 break;
         }
