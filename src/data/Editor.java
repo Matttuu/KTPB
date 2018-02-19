@@ -15,6 +15,7 @@ public class Editor {
     private TileType[] types;
 
     public Editor(){
+        // loadMap, loads the mapName of a saved map.
         this.grid = loadMap("newMap1");
         this.index = 0;
         this.types = new TileType[3];
@@ -36,8 +37,10 @@ public class Editor {
                 // System.out.println("right");  // Test if work
                 moveIndex();
             }
+
+            // Hit "S" when in Editor mode to save the grid.
             if (Keyboard.getEventKey() == Keyboard.KEY_S && Keyboard.getEventKeyState()) {
-                // System.out.println("right");  // Test if work
+                /** Edit String beneath to name filename for the map **/
                 saveMap("newMap1", grid);
 
             }
